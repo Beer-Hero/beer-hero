@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:beer_hero/routes.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class SplashPageState extends State<SplashPage> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/HomeScreen');
+    Navigator.of(context).pushReplacementNamed(TRENDING);
   }
 
   @override
