@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Beer Hero',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.cyan,
       ),
       home: new SplashPage(),
       routes: <String, WidgetBuilder>{

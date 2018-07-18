@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 
 class GlobalScaffold extends StatelessWidget {
   final Widget body;
+  final String titleText;
 
   final TextStyle tileStyle = new TextStyle(fontSize: 17.0);
 
-  GlobalScaffold({Key key, this.body}) : super(key: key);
+  GlobalScaffold({Key key, this.body, this.titleText = 'Beer Hero'}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: new AppBar(
-        title: new Text('Beer Hero'),
+        title: new Text(titleText),
       ),
       drawer: new Drawer(
         child: new ListView(
