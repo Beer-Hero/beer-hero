@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "556527258806",
+    "firebase_url": "https://beer-hero-cb5ef.firebaseio.com",
+    "project_id": "beer-hero-cb5ef",
+    "storage_bucket": "beer-hero-cb5ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556527258806:android:8ae0287f5ea7cf03",
+        "android_client_info": {
+          "package_name": "edu.wit.seniorproject.beerhero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556527258806-1pj1nfkrptus82u9sc6vpcrkasbcnrdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx3GvjBHrRzIVDjNVIDTOP23h4Bmj8jT0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

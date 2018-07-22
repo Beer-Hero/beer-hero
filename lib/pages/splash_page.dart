@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:beer_hero/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -14,7 +15,9 @@ class SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    startTime();
+    FirebaseAuth.instance.signInAnonymously().then((final FirebaseUser user) {
+      startTime();
+    });
   }
 
   startTime() async {

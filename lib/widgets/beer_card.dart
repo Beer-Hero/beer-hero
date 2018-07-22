@@ -16,9 +16,10 @@ class BeerCard extends StatelessWidget {
           new ListTile(
             leading: const Icon(Icons.local_drink),
             contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            title: new Text(beer.name),
-            subtitle: new Text('${beer.category != null ? 'Category: ${beer.category}\n' : ''}'
-                '${beer.style != null ? 'Style: ${beer.style}' : ''}'),
+            title: new Text(beer.name.isNotEmpty ? beer.name : 'Unknown'),
+            subtitle: new Text('${beer.brewerName != null ? '${beer.brewerName}\n' : ''}'
+                '${beer.categoryName != null ? 'Category: ${beer.categoryName}\n' : ''}'
+                '${beer.styleName != null ? 'Style: ${beer.styleName}' : ''}'),
           ),
           new ButtonTheme.bar(
             // make buttons use the appropriate styles for cards
