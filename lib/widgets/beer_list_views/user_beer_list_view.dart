@@ -46,7 +46,7 @@ class UserBeerListViewState extends State<UserBeerListView> {
   @override
   Widget build(BuildContext context) {
     if (beerDocReferences == null) {
-      return new Container(); //TODO: Should be a loading widget
+      return new CircularProgressIndicator();
     }
     print('[UserBeerListView] Building with ${beerDocReferences.length} beer(s) from field [$fieldName]');
     final DocumentListView documentListView = new DocumentListView(beerDocReferences);

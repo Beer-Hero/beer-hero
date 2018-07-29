@@ -107,6 +107,7 @@ class BeerCardState extends State<BeerCard> {
   @override
   Widget build(BuildContext context) {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -139,7 +140,7 @@ class BeerCardState extends State<BeerCard> {
                   onPressed: () {
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (final BuildContext context) {
-                        return new BeerInfoPage(beer);
+                        return new BeerInfoPage(beer: beer);
                       },
                     ));
                   },

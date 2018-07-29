@@ -14,20 +14,21 @@ class Beer {
   final String description;
   final dynamic abv;
   final dynamic ibu;
+  final List<String> tags;
 
-  Beer({
-    this.beerId,
-    this.brewerId,
-    this.brewerName,
-    this.name,
-    this.categoryId,
-    this.categoryName,
-    this.styleId,
-    this.styleName,
-    this.description,
-    this.abv,
-    this.ibu,
-  });
+  Beer(
+      {this.beerId,
+      this.brewerId,
+      this.brewerName,
+      this.name,
+      this.categoryId,
+      this.categoryName,
+      this.styleId,
+      this.styleName,
+      this.description,
+      this.abv,
+      this.ibu,
+      this.tags});
 
   static Beer fromMap(final String beerId, final Map<String, dynamic> data) {
     return new Beer(
@@ -42,6 +43,7 @@ class Beer {
       description: _normalizeDataToString(data['description']),
       abv: data['abv'],
       ibu: data['ibu'],
+      tags: new List<String>.from(data['tags'] != null ? data['tags'] : []),
     );
   }
 
