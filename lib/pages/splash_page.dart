@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:beer_hero/routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,17 @@ class SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     FirebaseAuth.instance.signInAnonymously().then((final FirebaseUser user) {
+      Firestore.instance.collection('users').document(user.uid).get().then((final DocumentSnapshot documentSnapshot) {
+        if (!documentSnapshot.exists) {
+          Firestore.instance.collection('users').document(user.uid).setData({
+            'likedBeers': [],
+            'dislikedBeers': [],
+            'recentSearches': [],
+            'recomendations': [],
+          });
+        }
+      });
+
       startTime();
     });
   }

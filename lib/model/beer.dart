@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+enum BeerStatus { LIKED, DISLIKED, UNKNOWN }
+
 class Beer {
   final String beerId;
   final String brewerId;
@@ -13,18 +15,19 @@ class Beer {
   final dynamic abv;
   final dynamic ibu;
 
-  Beer(
-      {this.beerId,
-      this.brewerId,
-      this.brewerName,
-      this.name,
-      this.categoryId,
-      this.categoryName,
-      this.styleId,
-      this.styleName,
-      this.description,
-      this.abv,
-      this.ibu});
+  Beer({
+    this.beerId,
+    this.brewerId,
+    this.brewerName,
+    this.name,
+    this.categoryId,
+    this.categoryName,
+    this.styleId,
+    this.styleName,
+    this.description,
+    this.abv,
+    this.ibu,
+  });
 
   static Beer fromMap(final String beerId, final Map<String, dynamic> data) {
     return new Beer(

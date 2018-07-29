@@ -33,8 +33,9 @@ class TrendingFeedState extends State<TrendingFeed> {
   Widget build(BuildContext context) {
     final List<BeerCard> beerCards = [];
     for (final Beer beer in beers) {
-      beerCards.add(new BeerCard(beer));
+      beerCards.add(new BeerCard(beer: beer));
     }
+
     return new Center(
       child: new ListView(
         children: beerCards,
