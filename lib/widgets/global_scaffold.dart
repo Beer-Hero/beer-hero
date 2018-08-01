@@ -24,6 +24,7 @@ class GlobalScaffold extends StatelessWidget {
           children: <Widget>[
             new DrawerHeader(
               child: new ListTile(
+                contentPadding: EdgeInsets.only(top: 30.0),
                 title: new Text(
                   'Beer Hero',
                   style: new TextStyle(color: Theme.of(context).primaryTextTheme.title.color, fontSize: 30.0),

@@ -24,11 +24,23 @@ class QueryListViewState extends State<QueryListView> {
   QueryListViewState(this.queries);
 
   @override
+  void didUpdateWidget(QueryListView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    update();
+  }
+
+  @override
   void initState() {
     super.initState();
 
+    update();
+  }
+
+  void update() {
     final List<Future> futures = [];
     for (final Query query in queries) {
+      print(query.buildArguments());
       futures.add(query.getDocuments());
     }
     Future.wait(futures).then((final List<dynamic> dynamicSnapshots) {
@@ -37,12 +49,13 @@ class QueryListViewState extends State<QueryListView> {
       setState(() {
         beers.clear();
         for (final QuerySnapshot querySnapshot in querySnapshots) {
-          print('Queried for ${querySnapshot.documents.length} beers');
+          print('[QueryListView] Queried for ${querySnapshot.documents.length} beers');
           for (final DocumentSnapshot documentSnapshot in querySnapshot.documents) {
             final Beer beer = Beer.fromDocumentSnapshot(documentSnapshot);
             beers.add(beer);
           }
         }
+        beers.shuffle();
       });
     }).catchError(() {
       print('[QueryListView] An error occured when waiting for futures');
@@ -51,7 +64,7 @@ class QueryListViewState extends State<QueryListView> {
 
   @override
   Widget build(BuildContext context) {
-    print('[QueryListView] Building with ${beers.length} of ${queries.length} beers');
+    print('[QueryListView] Building with ${beers.length} beers from ${queries.length} queries');
     return new BeerListView(beers);
   }
 }

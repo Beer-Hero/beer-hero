@@ -10,7 +10,7 @@ class TrendingPage extends StatelessWidget {
         titleText: 'Trending',
         body: new ListView(
           children: <Widget>[
-            new QueryListView([Firestore.instance.collection('beers').limit(10)])
+            new QueryListView([Firestore.instance.collection('beers').limit(15)])
           ],
         ));
   }

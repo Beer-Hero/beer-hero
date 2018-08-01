@@ -49,7 +49,6 @@ class UserBeerListViewState extends State<UserBeerListView> {
       return new CircularProgressIndicator();
     }
     print('[UserBeerListView] Building with ${beerDocReferences.length} beer(s) from field [$fieldName]');
-    final DocumentListView documentListView = new DocumentListView(beerDocReferences);
-    return documentListView;
+    return new DocumentListView(beerDocReferences);
   }
 }
