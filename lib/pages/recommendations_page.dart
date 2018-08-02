@@ -15,7 +15,7 @@ class RecommendationsPage extends StatefulWidget {
 }
 
 class RecommendationsPageState extends State<RecommendationsPage> {
-  List<String> styleNames;
+  Set<String> styleNames;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class RecommendationsPageState extends State<RecommendationsPage> {
         }
         Future.wait(documentSnapshots).then((final List<dynamic> dynamicSnapshots) {
           setState(() {
-            styleNames = [];
+            styleNames = new Set<String>();
             final List<DocumentSnapshot> documentSnapshots = new List<DocumentSnapshot>.from(dynamicSnapshots);
             for (final DocumentSnapshot documentSnapshot in documentSnapshots) {
               final String styleName = Beer.fromDocumentSnapshot(documentSnapshot).styleName;
