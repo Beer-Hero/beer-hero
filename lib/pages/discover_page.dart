@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:beer_hero/widgets/beer_list_views/query_list_view.dart';
 import 'package:beer_hero/widgets/beer_list_views/user_beer_list_view.dart';
 import 'package:beer_hero/widgets/global_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -61,7 +65,7 @@ class DiscoverPageState extends State<DiscoverPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: new FlatButton(
                     onPressed: () {
-                      //TODO: Open camera for upc search
+                      scan();
                     },
                     child: new Icon(
                       Icons.camera,
@@ -106,6 +110,11 @@ class DiscoverPageState extends State<DiscoverPage> {
   void _search() {
     final String searchText = textEditingController.text.trim();
     searching = searchText.isNotEmpty;
+
+    this.setState(() {
+      queries.clear();
+    });
+
     if (!searching) {
       return;
     }
@@ -115,6 +124,7 @@ class DiscoverPageState extends State<DiscoverPage> {
         print('Creating query for [$searchText]');
         queries.clear();
         queries.add(Firestore.instance.collection('beers').where('name', isEqualTo: searchText));
+        queries.add(Firestore.instance.collection('beers').where('upc', isEqualTo: searchText));
       });
     });
   }
@@ -126,8 +136,31 @@ class DiscoverPageState extends State<DiscoverPage> {
 
     return new Column(
       children: <Widget>[
-        new QueryListView(queries),
+        new QueryListView(
+          queries,
+          uploadRecent: true,
+        ),
       ],
     );
+  }
+
+  Future scan() async {
+    try {
+      String barcode = await BarcodeScanner.scan();
+      this.textEditingController.text = barcode;
+      _search();
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          this.textEditingController.text = 'The user did not grant the camera permission!';
+        });
+      } else {
+        this.textEditingController.text = 'Unknown error: $e';
+      }
+    } on FormatException {
+      this.textEditingController.text = 'null (User returned using the "back"-button before scanning anything. Result)';
+    } catch (e) {
+      this.textEditingController.text = 'Unknown error: $e';
+    }
   }
 }

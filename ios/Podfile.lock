@@ -1,4 +1,7 @@
 PODS:
+  - barcode_scan (0.0.1):
+    - Flutter
+    - MTBBarcodeScanner
   - BoringSSL (10.0.5):
     - BoringSSL/Implementation (= 10.0.5)
     - BoringSSL/Interface (= 10.0.5)
@@ -87,6 +90,7 @@ PODS:
     - gRPC-RxLibrary (= 1.13.0)
   - GTMSessionFetcher/Core (1.1.15)
   - leveldb-library (1.20)
+  - MTBBarcodeScanner (5.0.6)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -97,6 +101,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -120,10 +125,13 @@ SPEC REPOS:
     - gRPC-RxLibrary
     - GTMSessionFetcher
     - leveldb-library
+    - MTBBarcodeScanner
     - nanopb
     - Protobuf
 
 EXTERNAL SOURCES:
+  barcode_scan:
+    :path: ".symlinks/plugins/barcode_scan/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_auth:
@@ -136,6 +144,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
+  barcode_scan: 8288e70cb430072003bce2c794a1431e7adbcb4d
   BoringSSL: cf3f1793eb6e3c445c4d150456341f149c268a35
   cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
   Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
@@ -155,6 +164,7 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: fa6852f98d6ec0b73c0ec2f6406c26943099d501
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MTBBarcodeScanner: bb0bb62e18b57f8a571a482248adc20722b70a91
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   url_launcher: 92b89c1029a0373879933c21642958c874539095

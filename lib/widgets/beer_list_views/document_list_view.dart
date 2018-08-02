@@ -56,6 +56,6 @@ class DocumentListViewState extends State<DocumentListView> {
   @override
   Widget build(BuildContext context) {
     print('[DocumentListView] Building with ${beers.length} of ${docReferences.length} beers');
-    return new BeerListView(beers);
+    return new BeerListView(new List<Beer>.from(beers.reversed));
   }
 }

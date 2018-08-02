@@ -3,25 +3,30 @@ import 'dart:async';
 import 'package:beer_hero/model/beer.dart';
 import 'package:beer_hero/widgets/beer_list_views/beer_list_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class QueryListView extends StatefulWidget {
   final List<Query> queries;
+  final bool uploadRecent;
+  final bool shuffle;
 
-  const QueryListView(this.queries);
+  const QueryListView(this.queries, {this.uploadRecent = false, this.shuffle = true});
 
   @override
   State<StatefulWidget> createState() {
-    return new QueryListViewState(queries);
+    return new QueryListViewState(queries, uploadRecent, shuffle);
   }
 }
 
 class QueryListViewState extends State<QueryListView> {
   final List<Query> queries;
+  final bool uploadRecent;
+  final bool shuffle;
 
   List<Beer> beers = [];
 
-  QueryListViewState(this.queries);
+  QueryListViewState(this.queries, this.uploadRecent, this.shuffle);
 
   @override
   void didUpdateWidget(QueryListView oldWidget) {
@@ -55,7 +60,30 @@ class QueryListViewState extends State<QueryListView> {
             beers.add(beer);
           }
         }
-        beers.shuffle();
+        if (uploadRecent == true && beers.length > 0) {
+          FirebaseAuth.instance.currentUser().then((final FirebaseUser firebaseUser) {
+            Firestore.instance
+                .collection('users')
+                .document(firebaseUser.uid)
+                .get()
+                .then((final DocumentSnapshot documentSnapshot) {
+              final List<String> recentBeerIds = new List<String>.from(documentSnapshot.data['recentSearches']);
+              final String newBeerId = beers[0].beerId;
+              if (!recentBeerIds.contains(newBeerId)) {
+                if (recentBeerIds.length >= 5) {
+                  recentBeerIds.removeAt(0);
+                }
+                recentBeerIds.add(beers[0].beerId);
+                Firestore.instance.collection('users').document(firebaseUser.uid).updateData(<String, dynamic>{
+                  'recentSearches': recentBeerIds,
+                });
+              }
+            });
+          });
+        }
+        if (this.shuffle) {
+          beers.shuffle();
+        }
       });
     }).catchError(() {
       print('[QueryListView] An error occured when waiting for futures');
@@ -65,6 +93,6 @@ class QueryListViewState extends State<QueryListView> {
   @override
   Widget build(BuildContext context) {
     print('[QueryListView] Building with ${beers.length} beers from ${queries.length} queries');
-    return new BeerListView(beers);
+    return new BeerListView(new List<Beer>.from(beers));
   }
 }
