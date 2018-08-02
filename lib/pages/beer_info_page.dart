@@ -56,7 +56,13 @@ class BeerInfoPageState extends State<BeerInfoPage> {
                 color: Theme.of(context).buttonColor,
               )),
         ),
-        body: new ListView(children: [_buildStyleCard(), _buildDescriptionCard(), _buildBrewerInfoCard()]));
+        body: new ListView(
+          children: [
+            _buildStyleCard(),
+            _buildDescriptionCard(),
+            _buildBrewerInfoCard(),
+          ],
+        ));
   }
 
   _goToWebsite(final String websiteUrl) async {

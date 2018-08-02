@@ -114,7 +114,7 @@ class BeerCardState extends State<BeerCard> {
           new ListTile(
             leading: const Icon(Icons.local_drink),
             contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            title: new Text(beer.name.isNotEmpty ? beer.name : 'Unknown'),
+            title: new Text(beer.name != null ? beer.name : 'Unknown'),
             subtitle: new Text('${beer.brewerName != null ? '${beer.brewerName}\n' : ''}'
                 '${beer.categoryName != null ? 'Category: ${beer.categoryName}\n' : ''}'
                 '${beer.styleName != null ? 'Style: ${beer.styleName}' : ''}'),

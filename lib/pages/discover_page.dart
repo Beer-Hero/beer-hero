@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:beer_hero/pages/new_beer_page.dart';
 import 'package:beer_hero/widgets/beer_list_views/query_list_view.dart';
 import 'package:beer_hero/widgets/beer_list_views/user_beer_list_view.dart';
 import 'package:beer_hero/widgets/global_scaffold.dart';
@@ -38,6 +39,13 @@ class DiscoverPageState extends State<DiscoverPage> {
     final Color iconColor = Theme.of(context).primaryTextTheme.button.color;
 
     return new GlobalScaffold(
+      floatingActionButton: new FloatingActionButton(
+          child: new Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(context, new MaterialPageRoute(builder: (final BuildContext context) {
+              return new NewBeerPage();
+            }));
+          }),
       titleText: 'Discover',
       body: new Padding(
         padding: const EdgeInsets.all(8.0),
