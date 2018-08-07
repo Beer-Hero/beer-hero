@@ -31,14 +31,13 @@ class DocumentListViewState extends State<DocumentListView> {
   }
 
   void update() {
-    final List<Future> futures = [];
+    final List<Future<DocumentSnapshot>> futures = [];
     for (final DocumentReference docReference in docReferences) {
       futures.add(docReference.get());
     }
 
-    Future.wait(futures).then((final List<dynamic> dynamicSnapshots) {
-      print('[DocumentListView] Futures returned: ${dynamicSnapshots.length}');
-      final List<DocumentSnapshot> documentSnapshots = new List<DocumentSnapshot>.from(dynamicSnapshots);
+    Future.wait(futures).then((final List<DocumentSnapshot> documentSnapshots) {
+      print('[DocumentListView] Futures returned: ${documentSnapshots.length}');
 
       setState(() {
         beers.clear();
@@ -50,6 +49,8 @@ class DocumentListViewState extends State<DocumentListView> {
       });
     }).catchError(() {
       print('[DocumentListView] An error occured when waiting for futures');
+    }).catchError((error) {
+      print(error);
     });
   }
 

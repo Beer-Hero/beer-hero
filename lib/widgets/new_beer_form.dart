@@ -94,10 +94,8 @@ class NewBeerFormState extends State<NewBeerForm> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     Scaffold.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
-                    _submit().then((_) {
-                      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Added beer')));
-                      Navigator.pop(context);
-                    });
+                    _submit();
+                    Navigator.pop(context);
                   }
                 },
                 child: new Row(
