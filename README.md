@@ -20,6 +20,7 @@ programming lanugage. We also utilized
 [Firebase](https://firebase.google.com/)
 for our backend services such as user authentication,
 a NoSQL database, and server-less cloud functions.
+
 [![Dart](./internals/logos/dart-144.png)](https://www.dartlang.org/)
 [![Flutter](./internals/logos/flutter-144.png)](https://www.flutter.io/)
 [![Firebase](./internals/logos/firebase-144.png)](https://firebase.google.com/)
@@ -27,13 +28,13 @@ a NoSQL database, and server-less cloud functions.
 ## Build Prerequisites
 In order to build this project you will need to install several dependencies
 #### Flutter
-Follow the 'Getting Started' guides for your operating system at [https://flutter.io/get-started/install/].
+Follow the 'Getting Started' guides for your operating system at [https://flutter.io/get-started/install/]().
 This guide should instruct you on how to install all the dependencies required
 to build our app.
 
 #### Configure Editor
 If you would like to use an editor, you should follow the steps
-here [https://flutter.io/get-started/editor/] to get the best experience.
+here [https://flutter.io/get-started/editor/]() to get the best experience.
 If you just want to build the project continue to the
 [Build](https://github.com/Beer-Hero/beer-hero#build)
 section.
@@ -71,6 +72,7 @@ To run an emulator, run
 flutter emulators --launch <emulator id>
 ```
 
-
-## Deployment
-
+Then run
+```text
+flutter start
+```
