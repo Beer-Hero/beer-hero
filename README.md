@@ -12,7 +12,7 @@ The app will be able to save what beers someone says they liked,
 and if they dislike a beer it will narrow down the recommendations.
 
 ## Technologies
-[![Dart](./internals/logos/dart.svg)](https://www.dartlang.org/)
+[![Dart](./internals/logos/dart.svg)](https://www.dartlang.org/){:height="144" width="144"}
 <a href="https://www.dartlang.org/">
   <img src="./internals/logos/dart.svg" width="100%" height="144">
 </a>
