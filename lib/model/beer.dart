@@ -51,6 +51,10 @@ class Beer {
   }
 
   static Beer fromMap(final String beerId, final Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+
     return new Beer(
         beerId: beerId,
         brewerId: _normalizeDataToString(data['breweryId']),

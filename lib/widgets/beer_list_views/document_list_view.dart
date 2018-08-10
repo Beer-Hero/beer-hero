@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:beer_hero/model/beer.dart';
 import 'package:beer_hero/widgets/beer_list_views/beer_list_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,27 +29,29 @@ class DocumentListViewState extends State<DocumentListView> {
   }
 
   void update() {
-    final List<Future<DocumentSnapshot>> futures = [];
+    beers.clear();
     for (final DocumentReference docReference in docReferences) {
-      futures.add(docReference.get());
+      try {
+        print('Trying to add ${docReference.documentID}');
+        docReference.get().then((final DocumentSnapshot documentSnapshot) {
+          setState(() {
+            _addBeer(documentSnapshot);
+          });
+        }).catchError((error) {
+          print('[DocumentListView] An error occured when waiting for futures');
+          print('Error: $error');
+        });
+      } catch (error) {
+        print('Failed to add ${docReference.documentID}');
+        print('Error: $error');
+      }
     }
+  }
 
-    Future.wait(futures).then((final List<DocumentSnapshot> documentSnapshots) {
-      print('[DocumentListView] Futures returned: ${documentSnapshots.length}');
-
-      setState(() {
-        beers.clear();
-        for (final DocumentSnapshot documentSnapshot in documentSnapshots) {
-          final Beer beer = Beer.fromDocumentSnapshot(documentSnapshot);
-          beers.add(beer);
-        }
-        print('[DocumentListView] Setting state with ${beers.length} of ${docReferences.length} beers');
-      });
-    }).catchError(() {
-      print('[DocumentListView] An error occured when waiting for futures');
-    }).catchError((error) {
-      print(error);
-    });
+  void _addBeer(final DocumentSnapshot documentSnapshot) {
+    final Beer beer = Beer.fromDocumentSnapshot(documentSnapshot);
+    beers.add(beer);
+    print('[DocumentListView] Setting state with ${beers.length} of ${docReferences.length} beers');
   }
 
   @override

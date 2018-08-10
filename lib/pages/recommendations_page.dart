@@ -37,6 +37,11 @@ class RecommendationsPageState extends State<RecommendationsPage> {
             styleNames = new Set<String>();
             final List<DocumentSnapshot> documentSnapshots = new List<DocumentSnapshot>.from(dynamicSnapshots);
             for (final DocumentSnapshot documentSnapshot in documentSnapshots) {
+              if (documentSnapshot.data == null) {
+                print('Invalid beer: ${documentSnapshot.documentID}');
+                continue;
+              }
+
               final String styleName = Beer.fromDocumentSnapshot(documentSnapshot).styleName;
               if (styleName != null && styleName.isNotEmpty) {
                 styleNames.add(styleName);
@@ -54,7 +59,9 @@ class RecommendationsPageState extends State<RecommendationsPage> {
       return new GlobalScaffold(
           titleText: 'Recommendations',
           body: new Center(
-            child: new CircularProgressIndicator(),
+            child: new CircularProgressIndicator(
+              backgroundColor: Colors.white,
+            ),
           ));
     }
 

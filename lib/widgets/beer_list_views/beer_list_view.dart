@@ -11,6 +11,10 @@ class BeerListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<BeerCard> beerCards = [];
     for (final Beer beer in beers) {
+      if (beer == null) {
+        continue;
+      }
+
       beerCards.add(new BeerCard(beer: beer));
     }
 

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:beer_hero/pages/new_beer_page.dart';
 import 'package:beer_hero/widgets/beer_list_views/query_list_view.dart';
@@ -79,9 +77,7 @@ class DiscoverPageState extends State<DiscoverPage> {
                 new Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: new FlatButton(
-                    onPressed: () {
-                      scan();
-                    },
+                    onPressed: _scan,
                     child: new Icon(
                       Icons.camera,
                       color: iconColor,
@@ -159,23 +155,33 @@ class DiscoverPageState extends State<DiscoverPage> {
     );
   }
 
-  Future scan() async {
+  void _scan() {
     try {
-      String barcode = await BarcodeScanner.scan();
-      this.textEditingController.text = barcode;
-      _search();
+      BarcodeScanner.scan().then((final String barcode) {
+        print('Barcode: $barcode');
+        this.textEditingController.text = barcode;
+        _search();
+      }).catchError((error) {
+        print(error);
+      });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          this.textEditingController.text = 'The user did not grant the camera permission!';
-        });
+        final String message = 'The user did not grant the camera permission!';
+        print(message);
+        this.textEditingController.text = message;
       } else {
-        this.textEditingController.text = 'Unknown error: $e';
+        final String message = 'Unknown error: $e';
+        print(message);
+        this.textEditingController.text = message;
       }
     } on FormatException {
-      this.textEditingController.text = 'null (User returned using the "back"-button before scanning anything. Result)';
+      final String message = 'null (User returned using the "back"-button before scanning anything. Result)';
+      print(message);
+      this.textEditingController.text = message;
     } catch (e) {
-      this.textEditingController.text = 'Unknown error: $e';
+      final String message = 'Unknown error: $e';
+      print(message);
+      this.textEditingController.text = message;
     }
   }
 }
